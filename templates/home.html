@@ -10,7 +10,7 @@
         <div class="profile_card">
             <div class="profile_card_top">
                 <div class="profile_bg">
-                    <img src="https://picsum.photos/50/50" class="profile_img" />
+                    <img src="https://picsum.photos/150/150" class="profile_img" />
                 </div>
                 <div class="profile_card_name">
                     <h6>Name : Demo Name </h6>
@@ -35,71 +35,41 @@
                 <!-- <button id="modal_toggler" >Click</button> -->
                 
             </div>
-            <button id="modal_toggler" class="glow-on-hover" type="button">HOVER ME, THEN CLICK ME!</button>
+            <button id="modal_toggler" class="glow-on-hover" type="button">CREATE POST </button>
             <div class="create_post_container_close post_modal">
-                <form class="create_post_form">
-                    <input type="text" name="caption" placeholder="Write Caption" id="">
-                    <textarea  name="description" placeholder="Write Your Post  " id=""></textarea>
-                    <input type="submit" value="CREATE POST">
+                <form method="post" action="{% url 'create_post' %}" class="create_post_form">
+                    {% csrf_token %}
+                    <textarea rows="6" name="caption" placeholder="Write Your Post  " id=""></textarea>
+                    <button type="submit">CREATE POST</button>
                 </form>
             </div>
         </div>
 
         <div class="post_cards_container">
-            <div class="post_card">
-                <div class="post_header">
-                    <img src="https://picsum.photos/50/50"/>
-                    <div class="uploaded_by" >
-                        <h5 >John Doe</h5>
-                        <h6 >Account Executive</h6>
-                        <p>11 min ago</p>
+
+            {% for post in posts %}
+
+                <div class="post_card">
+                    <div class="post_header">
+                        <img src="https://picsum.photos/id/{{forloop.counter}}/200/200"/>
+                        <div class="uploaded_by" >
+                            <h5 >{{post.user.username}}</h5>
+                            <h6 >Account Executive</h6>
+                            <p>11 min ago</p>
+                        </div>
+                    </div>
+
+                    <div class="post_caption">
+                        <p>post.caption</p>
+                    </div>
+
+                    <div class="post_img">
+                        <img  src="https://picsum.photos/id/{{forloop.counter1}}/300/300"/>
                     </div>
                 </div>
+            
+            {% endfor %}
 
-                <div class="post_caption">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis unde quibusdam, reiciendis commodi tenetur aut rerum quis? Quidem, eius magni.</p>
-                </div>
-
-                <div class="post_img">
-                    <img src="https://picsum.photos/50/50"/>
-                </div>
-            </div>
-            <div class="post_card">
-                <div class="post_header">
-                    <img src="https://picsum.photos/50/50"/>
-                    <div class="uploaded_by" >
-                        <h5 >John Doe</h5>
-                        <h6 >Account Executive</h6>
-                        <p>11 min ago</p>
-                    </div>
-                </div>
-
-                <div class="post_caption">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis unde quibusdam, reiciendis commodi tenetur aut rerum quis? Quidem, eius magni.</p>
-                </div>
-
-                <div class="post_img">
-                    <img src="https://picsum.photos/50/50"/>
-                </div>
-            </div>
-            <div class="post_card">
-                <div class="post_header">
-                    <img src="https://picsum.photos/50/50"/>
-                    <div class="uploaded_by" >
-                        <h5 >John Doe</h5>
-                        <h6 >Account Executive</h6>
-                        <p>11 min ago</p>
-                    </div>
-                </div>
-
-                <div class="post_caption">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis unde quibusdam, reiciendis commodi tenetur aut rerum quis? Quidem, eius magni.</p>
-                </div>
-
-                <div class="post_img">
-                    <img src="https://picsum.photos/50/50"/>
-                </div>
-            </div>
         </div>
 
 

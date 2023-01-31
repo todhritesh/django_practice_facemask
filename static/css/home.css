@@ -101,19 +101,28 @@
     row-gap: 5px;
     flex-direction: column;
     min-width: 400px;
+    width: 50vw;
     padding: 10px;
     background-color: white;
     border-radius: 10px;
 }
 
-.create_post_form textarea:focus , .create_post_form input:focus {
+.create_post_form textarea:focus {
     outline: none;
 }
 
-.create_post_form input[type=submit]  {
+.create_post_form textarea {
+    border-radius: 10px;
+    resize: none;
+    font-size: 20px;
+    padding-left: 5px;
+}
+
+.create_post_form button  {
     outline: none;
     background-color: black;
     color: white;
+    padding:10px
 }
 
 .post_cards_container {
@@ -164,7 +173,6 @@
 
 .post_img img {
     width: 100%;
-    height: 300px;
     border-radius: 10px;
     border: 5px solid hsl(48deg 17% 94%);
 }

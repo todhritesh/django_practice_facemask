@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth.models import User
-from .models import Account
+from .models import Account , Post
 from django.contrib.auth import authenticate , login as handle_login
 
 
@@ -8,7 +8,22 @@ def index(req):
     return render(req,"index.html")
 
 def home(req):
-    return render(req,"home.html")
+    posts = Post.objects.all()
+    return render(req,"home.html",{'posts':posts})
+
+def create_post(req):
+    print("hello")
+    if(req.method=='POST'):
+
+        try:
+            post = Post()
+            print(req.POST.get('caption'))
+            post.user = req.user
+            post.caption = req.POST.get('caption')
+            post.save()
+        except:
+            pass
+        return redirect("home")
 
 def login(req):
     try:
