@@ -11,6 +11,7 @@
                         News
                     </button>
                 </li>
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">Logout</a>
             {% else %}
                 <form method="post" action="{% url 'login' %}" class="d-flex gap-2 h-75">
                     {% csrf_token %}

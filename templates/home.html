@@ -10,11 +10,23 @@
         <div class="profile_card">
             <div class="profile_card_top">
                 <div class="profile_bg">
-                    <img src="https://picsum.photos/150/150" class="profile_img" />
+                    {% if user.account.profile_image %}
+                    <img src = "{{user.account.profile_image.url}}" class="profile_img" />
+                    {% else %}
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj3zizMiOMtIM_Vr1GAAyxCKoQUjP9J19W3JMnbIjyB1xTgMEytEzOyietXhOKwJrplnY&usqp=CAU" class="profile_img" />
+                    {% endif %}
+                     
                 </div>
                 <div class="profile_card_name">
-                    <h6>Name : Demo Name </h6>
+                    {{user.user.profile_image.url}}
+                    <h6>Name : {{user.username}} </h6>
+                    <h6>Name : {{user.user.profile_image.url}} </h6>
                     <h6>PROJECT MANAGER </h6>
+                    <form method="post" action="{%url 'handle_dp'%}" enctype="multipart/form-data" >
+                        {% csrf_token %}
+                        <label class="btn btn-outline-dark btn-sm" for="image">Change / Upload DP</label>
+                        <input onchange="this.form.submit()" type="file" style="display: none;" name="image" id="image" >
+                    </form>
                 </div>
             </div>
             <!-- <div class="profile_card_bottom"></div> -->
@@ -37,9 +49,14 @@
             </div>
             <button id="modal_toggler" class="glow-on-hover" type="button">CREATE POST </button>
             <div class="create_post_container_close post_modal">
-                <form method="post" action="{% url 'create_post' %}" class="create_post_form">
+                <form enctype="multipart/form-data" method="post" action="{% url 'create_post' %}" class="create_post_form">
                     {% csrf_token %}
                     <textarea rows="6" name="caption" placeholder="Write Your Post  " id=""></textarea>
+                    <div class="d-flex align-items-center flex-row">
+                        <label class="btn btn-outline-dark btn-sm " style="width: fit-content;" for="post_image">ADD PHOTO</label>
+                        <p class="my-auto ms-2 img_name" >helo</p>
+                    </div>
+                    <input onclick="handle_post_image()" type="file" style="display: none;" name="post_image" class="post_image_input" id="post_image" >
                     <button type="submit">CREATE POST</button>
                 </form>
             </div>
@@ -60,11 +77,17 @@
                     </div>
 
                     <div class="post_caption">
-                        <p>post.caption</p>
+                        <p>{{post.caption}}</p>
                     </div>
 
                     <div class="post_img">
-                        <img  src="https://picsum.photos/id/{{forloop.counter1}}/300/300"/>
+
+                            {% if post.image %}
+                                <img height="500px" src = {{post.image.url}} />
+                            {% else %}
+                                <img height="500px" src = "https://picsum.photos/id/{{forloop.counter}}/200/200" />
+                            {% endif %}
+
                     </div>
                 </div>
             
@@ -170,7 +193,10 @@
     </div>
   </div>
 
-<script>
+
+
+
+  <script>
     const modal = document.getElementsByClassName('post_modal')[0]
     const btn = document.getElementById('modal_toggler')
     btn.onclick = e => {
@@ -189,6 +215,17 @@
     function toggleSidebar() {
         const sidebar = document.querySelector(".sidebar");
         sidebar.classList.toggle("active");
+      }
+
+      function handle_post_image (){
+        const post_image_input = document.querySelector('.post_image_input')
+        console.log('hello')
+        post_image_input.addEventListener('change',e=>{
+            const img_name = document.querySelector('.img_name')
+            const name = e.target.files[0].name
+            img_name.innerHTML = name.length >20 ? name.substring(0,20) + "..." : name
+        })
+
       }
 
 </script>
