@@ -54,7 +54,7 @@
                     <textarea rows="6" name="caption" placeholder="Write Your Post  " id=""></textarea>
                     <div class="d-flex align-items-center flex-row">
                         <label class="btn btn-outline-dark btn-sm " style="width: fit-content;" for="post_image">ADD PHOTO</label>
-                        <p class="my-auto ms-2 img_name" >helo</p>
+                        <p class="my-auto ms-2 img_name" ></p>
                     </div>
                     <input onclick="handle_post_image()" type="file" style="display: none;" name="post_image" class="post_image_input" id="post_image" >
                     <button type="submit">CREATE POST</button>
@@ -219,11 +219,11 @@
 
       function handle_post_image (){
         const post_image_input = document.querySelector('.post_image_input')
-        console.log('hello')
         post_image_input.addEventListener('change',e=>{
             const img_name = document.querySelector('.img_name')
             const name = e.target.files[0].name
             img_name.innerHTML = name.length >20 ? name.substring(0,20) + "..." : name
+            post_image_input.removeEventListener('change')
         })
 
       }

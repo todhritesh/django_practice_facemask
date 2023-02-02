@@ -68,17 +68,26 @@
 
 .create_post_container_open{
     width: 100vw;
+    height: 100vh;
     z-index: 9999;
     left:0;
     right: 0;
     top: 0;
     bottom: 0;
-    height: 100vh;
     position: fixed;
-    background-color: rgba(36, 36, 36, 0.5);
+    background-color: rgba(20, 20, 20, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: form_visibility_transition .2s linear forwards 1;
+}
+
+@keyframes form_visibility_transition {
+    0% {opacity: 0;}
+    25% {opacity: .25;}
+    50% {opacity: .5;}
+    75% {opacity: .75;}
+    100% {opacity: 1;}
 }
 
 .create_post_container_close {
